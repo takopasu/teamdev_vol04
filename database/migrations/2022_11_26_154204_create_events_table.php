@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('event_name');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('start_time');
-            $table->string('end_time');
-            $table->string('enter_month');
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
+            $table->string('enter_month')->nullable();
             $table->string('book_link')->nullable();
             $table->string('handout_link')->nullable();
         });
