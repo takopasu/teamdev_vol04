@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/mentor_calendar', function () {
+    return view('/events/mentor_calendar');
+});
+
+Route::get('/student_calendar', function () {
+    return view('/events/student_calendar');
+});
+
+Route::post('/event-add', [EventController::class, 'eventAdd'])->name('event-add');
+Route::post('/event-get', [EventController::class, 'eventGet'])->name('event-get');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
