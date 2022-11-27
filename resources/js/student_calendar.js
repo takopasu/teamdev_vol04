@@ -18,38 +18,6 @@ if (student_calendarEl != null){
             right: "dayGridMonth,timeGridWeek,listWeek",
         },
         locale: "ja",
-    
-        // // 日付をクリック、または範囲を選択したイベント
-        // selectable: true,
-        // select: function (info) {
-        //     //alert("selected " + info.startStr + " to " + info.endStr);
-    
-        //     // 入力ダイアログ
-        //     const eventName = prompt("イベントを入力してください");
-    
-        //     if (eventName) {
-        //         // Laravelの登録処理の呼び出し
-        //         axios
-        //             .post("/event-add", {
-        //                 start_date: info.start.valueOf(),
-        //                 end_date: info.end.valueOf(),
-        //                 event_name: eventName,
-        //             })
-        //             .then(() => {
-        //                 // イベントの追加
-        //                 student_calendar.addEvent({
-        //                     title: eventName,
-        //                     start: info.start,
-        //                     end: info.end,
-        //                     allDay: true,
-        //                 });
-        //             })
-        //             .catch(() => {
-        //                 // バリデーションエラーなど
-        //                 alert("登録に失敗しました");
-        //             });
-        //     }
-        // },
         
         events: function (info, successCallback, failureCallback) {
             // Laravelのイベント取得処理の呼び出し
@@ -69,6 +37,10 @@ if (student_calendarEl != null){
                     alert("読み込みに失敗しました");
                 });
         },
+        
+        // eventClick: function(info) {
+        //     alert('View: ' + info.view.type);
+        // },
     
     });
     student_calendar.render();
