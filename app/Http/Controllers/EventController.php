@@ -42,15 +42,14 @@ class EventController extends Controller
             'start_date' => 'required|integer',
             'end_date' => 'required|integer'
         ]);
-
         // カレンダー表示期間
         $start_date = date('Y-m-d', $request->input('start_date') / 1000);
         $end_date = date('Y-m-d', $request->input('end_date') / 1000);
-
         // 登録処理
         return Event::query()
             ->select(
                 // FullCalendarの形式に合わせる
+                'id',
                 'start_date as start',
                 'end_date as end',
                 'event_name as title',
@@ -60,17 +59,19 @@ class EventController extends Controller
             ->where('start_date', '<', $end_date)
             ->get();
     }
-      
-    public function eventEdit(Request $request)
+    public function show(Event $event,Request $request)
     {
-        // カレンダー表示期間
-        $id = $request->input('id');
-        // 登録処理
-        Event::query()
-            ->where('id', '=', $id)
-            ->get();
-            
-        return redirect('/student_calendar');
+        return view('events/show')->with(['event' => $event]);
+    }
+    public function edit(Event $event)
+    {
+        return view('events/edit')->with(['event' => $event]);
+    }
+    public function update(PostRequest $request, Event $event)
+    {
+        $input_post = $request['event'];
+        $event->fill($input_post)->save();
+        return redirect('/events/' . $event->id);
     }
     
 }

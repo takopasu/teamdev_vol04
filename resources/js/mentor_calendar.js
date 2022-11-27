@@ -64,19 +64,9 @@ if (mentor_calendarEl != null){
         },
         
 
-        eventClick: function(info) {
-            console.log(info.event);
-            console.log(info.event.id);
-            
-            // Laravelの登録処理の呼び出し
-            axios
-                .post("/event-show", {
-                    id : info.event.id,
-                })
-                .catch(() => {
-                    // バリデーションエラーなど
-                    alert("遷移に失敗しました");
-                });
+        function(info) {
+             // Laravelの登録処理の呼び出し
+                location.href='https://us-east-1.console.aws.amazon.com/cloud9/ide/0f4b815cdb8148168964bb4c5dbc20f9/events' + info.event.id;
             },
         
         events: function (info, successCallback, failureCallback) {
