@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
-    public function index()
+    public function admin_index()
     {
-        return view('login.index');
+        return view('/admin/login/admin_index');
     }
 
     public function login(Request $request)

@@ -5,11 +5,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
-    public function index()
+    public function mentor_calendar()
     {
-        return view('admin.login.index');
+        return view('events/mentor_calendar');
     }
 
     public function login(Request $request)
