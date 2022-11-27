@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        // 追加ここから
+        'mentors' => [
+            'driver' => 'session',
+            'provider' => 'mentors',
+        ],
+        'students' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+	    // 追加ここまで
     ],
 
     /*
@@ -64,6 +74,16 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        // 追加ここから
+        'mentors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Mentor::class,
+        ],
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
+        ],
+	// 追加ここまで
 
         // 'users' => [
         //     'driver' => 'database',

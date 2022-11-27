@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\AdminIndexController;
+use App\Http\Controllers\StudentLoginController;
+use App\Http\Controllers\StudentIndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +34,7 @@ Route::get('/student_calendar', function () {
 
 Route::post('/event-add', [EventController::class, 'eventAdd'])->name('event-add');
 Route::post('/event-get', [EventController::class, 'eventGet'])->name('event-get');
-Route::put('/event-edit', [EventController::class, 'eventEdit'])->name('event-edit');
-// Route::post('/event-edit', [EventController::class,'eventEdit']) ->name('event-edit');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -42,5 +45,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// 管理画面（admin/配下に置くことを想定しています。groupメソッドでまとめると便利です。）
+use App\Http\Controllers\Admin;
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [Admin\AdminLoginController::class, 'index'])->name('admin.login.index');
+    Route::post('/login', [Admin\AdminLoginController::class, 'login'])->name('admin.login.login');
+    Route::get('/logout', [Admin\AdminLoginController::class, 'logout'])->name('admin.login.logout');
+});
+// 管理者（mentorsテーブル）未認証の場合にログインフォームに強制リダイレクトさせるミドルウェアを設定する。  
+Route::prefix('admin')->middleware('auth:mentors')->group(function () {
+    Route::get('/',[Admin\AdminIndexController::class, 'index'])->name('admin.index');
+});
+
+// フロント
+use App\Http\Controllers;
+Route::get('/login', [Controllers\StudentLoginController::class, 'index'])->name('login.index');
+Route::post('/login', [Controllers\StudentLoginController::class, 'login'])->name('login.login');
+Route::get('/logout', [Controllers\StudentLoginController::class, 'logout'])->name('login.logout');
+Route::get('/admin_calendar', [Controllers\StudentIndexController::class, 'admin_index'])->name('admin_index');
+Route::get('/student_calendar', [Controllers\IndexController::class, 'student_index'])->name('student_index');
 
 require __DIR__.'/auth.php';
