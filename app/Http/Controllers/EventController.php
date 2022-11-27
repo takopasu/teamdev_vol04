@@ -14,6 +14,9 @@ class EventController extends Controller
             'start_date' => 'required|integer',
             'end_date' => 'required|integer',
             'event_name' => 'required|max:32',
+            'start_time' => 'required|max:32',
+            'end_time' => 'required|max:32',
+            'enter_month' => 'required|max:32',
         ]);
 
         // 登録処理
@@ -22,6 +25,11 @@ class EventController extends Controller
         $event->start_date = date('Y-m-d', $request->input('start_date') / 1000);
         $event->end_date = date('Y-m-d', $request->input('end_date') / 1000);
         $event->event_name = $request->input('event_name');
+        $event->start_time = $request->input('start_time');
+        $event->end_time = $request->input('end_time');
+        $event->enter_month = $request->input('enter_month');
+        $event->book_link = $request->input('book_link');
+        $event->handout_link = $request->input('handout_link');
         $event->save();
 
         return;
@@ -45,11 +53,10 @@ class EventController extends Controller
                 // FullCalendarの形式に合わせる
                 'start_date as start',
                 'end_date as end',
-                'event_name as title'
+                'event_name as title',
             )
             // FullCalendarの表示範囲のみ表示
             ->where('end_date', '>', $start_date)
             ->where('start_date', '<', $end_date)
             ->get();
     }
-}
