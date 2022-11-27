@@ -34,6 +34,7 @@ Route::get('/student_calendar', function () {
 
 Route::post('/event-add', [EventController::class, 'eventAdd'])->name('event-add');
 Route::post('/event-get', [EventController::class, 'eventGet'])->name('event-get');
+Route::post('/event-show',[EventController::class,'eventShow'])->name('event-show');
 
 
 Route::get('/dashboard', function () {

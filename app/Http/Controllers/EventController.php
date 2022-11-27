@@ -60,3 +60,17 @@ class EventController extends Controller
             ->where('start_date', '<', $end_date)
             ->get();
     }
+      
+    public function eventEdit(Request $request)
+    {
+        // カレンダー表示期間
+        $id = $request->input('id');
+        // 登録処理
+        Event::query()
+            ->where('id', '=', $id)
+            ->get();
+            
+        return redirect('/student_calendar');
+    }
+    
+}
