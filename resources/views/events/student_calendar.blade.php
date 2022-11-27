@@ -10,15 +10,15 @@
                     {{ session('login_msg') }}
                 </div>
             @endif
-            @if (Auth::guard('members')->check())
-                <div>ユーザーID {{ Auth::guard('members')->user()->userid }}でログイン中</div>
+            @if (Auth::guard('students')->check())
+                <div>ユーザーID {{ Auth::guard('students')->user()->userid }}でログイン中</div>
             @else
                 <div>ログインしていません</div>
             @endif
             <ul>
                 <li>ログイン状態: {{ Auth::check() }}</li>
-                <li>管理者（Administrator）ログイン状態: {{ Auth::guard('administrators')->check() }}</li>
-                <li>会員（members） ログイン状態: {{ Auth::guard('members')->check() }}</li>
+                <li>管理者（Mentor）ログイン状態: {{ Auth::guard('mentors')->check() }}</li>
+                <li>会員（students） ログイン状態: {{ Auth::guard('students')->check() }}</li>
             </ul>
             <div>
                 <a href="/admin/logout">ログアウト</a>
