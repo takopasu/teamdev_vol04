@@ -10,13 +10,15 @@
         &#x26A0; {{ $message }}
     </div>
     @enderror
-    <form method="POST" action="/login">
+    <form method="POST" action="/student_calendar">
       @csrf
-      <label class="mt-3">ユーザーID</label>
-      <input type="text" name="email" class="form-control">
+      <label class="mt-3">メールアドレス</label>
+      <input type="text" name="email" class="form-control" placeholder="levcale2022@gmail.com">
       <label class="mt-3">パスワード</label>
-      <input class="form-control" type="password" name="password">
+      <input class="form-control" type="password" name="password" placeholder="パスワードを入力">
       <button class="btn btn-primary mt-5" type="submit">ログイン</button>
+      <a href="/register">登録がまだの方はこちら</a>
+      <a href="/admin_index">メンターの方はこちら</a>
     </form>
   </div>
 </body>
